@@ -1,5 +1,5 @@
 # pick_and_place
-This project is created to pick and place 2D objects using aubo-i5 robot with intel realsense D435 depth camera.
+This project is a vision based pick and place operation of 2D objects using aubo-i5 robot with intel realsense D435 depth camera.
 
 ## 1. Development Environment
 - Ubuntu 16.04.2
