@@ -1,0 +1,38 @@
+<launch>
+	<!-- Example finding 3D poses of the objects detected -->
+	<!-- $roslaunch openni_launch openni.launch depth_registration:=true -->
+	
+	<arg name="object_prefix" default="object"/>
+	<arg name="objects_path"  default="/home/ncrai/catkin_ws/src/line_grow/train"/>
+	<arg name="gui"           default="true"/>
+	<arg name="approx_sync"   default="true"/>
+	<arg name="pnp"           default="true"/>
+	<arg name="tf_example"    default="true"/>
+	<arg name="settings_path" default="~/.ros/find_object_2d.ini"/>
+	
+	<arg name="rgb_topic"         default="/camera/color/image_raw"/>
+	<arg name="depth_topic"       default="/camera/aligned_depth_to_color/image_raw"/>
+	<arg name="camera_info_topic" default="/camera/aligned_depth_to_color/camera_info"/>
+	
+	<node name="find_object_2d" pkg="find_object_2d" type="find_object_2d">
+		<param name="gui" value="$(arg gui)" type="bool"/>
+		<param name="settings_path" value="$(arg settings_path)" type="str"/>
+		<param name="subscribe_depth" value="true" type="bool"/>
+		<param name="objects_path" value="$(arg objects_path)" type="str"/>
+		<param name="object_prefix" value="$(arg object_prefix)" type="str"/>
+		<param name="approx_sync" value="$(arg approx_sync)" type="bool"/>
+		<param name="pnp" value="$(arg pnp)" type="bool"/>
+		<param name="target_frame_id" value="world"/>
+		<remap from="rgb/image_rect_color" to="$(arg rgb_topic)"/>
+		<remap from="depth_registered/image_raw" to="$(arg depth_topic)"/>
+		<remap from="depth_registered/camera_info" to="$(arg camera_info_topic)"/>
+	</node>
+	<node 
+		name="pick" 
+		pkg="pick_and_place" 
+		type="pick.py"
+	/>
+	
+	<include file="$(find realsense2_camera)/launch/rs_camera.launch" /> 
+	<include file="$(find aubo_gripper_moveit_config)/launch/moveit.launch" /> 
+</launch>

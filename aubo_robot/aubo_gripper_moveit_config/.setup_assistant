@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: aubo_description
+    relative_path: urdf/aubo_i5_b1.urdf
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/aubo_i5.srdf
+  CONFIG:
+    author_name: abhishek pg
+    author_email: abhishekpg111@gmail.com
+    generated_timestamp: 1581920249

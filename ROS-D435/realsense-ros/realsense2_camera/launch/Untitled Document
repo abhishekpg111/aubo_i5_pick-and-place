@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- launch the aruco detection -->
+    <include file="$(find aruco_detect)/launch/aruco_detect.launch" >
+        <arg name="camera" value="camera/color" />
+        <arg name="image" value="image_raw" />
+        <!-- <arg name="fiducial_len" value="0.136" /> -->
+        <!-- <arg name="fiducial_len" value="0.82" /> -->
+        <arg name="fiducial_len" value="0.14" />
+        <arg name="dictionary" value="7" />
+        <!-- <arg name="fiducial_len" value="0.1558" /> -->
+    </include>
+</launch>
